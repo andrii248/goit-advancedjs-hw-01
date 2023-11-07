@@ -8,8 +8,8 @@ const formMessage = form.elements.message;
 try {
   const parseSettings = JSON.parse(localStorage.getItem(LS_KEY));
 
-  formEmail.value = parseSettings.email;
-  formMessage.value = parseSettings.message;
+  formEmail.value = parseSettings.email || '';
+  formMessage.value = parseSettings.message || '';
 } catch (error) {}
 
 form.addEventListener('input', throttle(handleInput, 500));
@@ -29,6 +29,9 @@ function handleInput(evt) {
 function handleSubmit(evt) {
   evt.preventDefault();
   localStorage.removeItem(LS_KEY);
+
+  if (!formEmail.value || !formMessage.value)
+    return alert('Please fill out all the fields');
   console.log({ email: formEmail.value, message: formMessage.value });
   form.reset();
 }
