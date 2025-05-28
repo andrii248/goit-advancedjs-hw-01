@@ -36,7 +36,7 @@ const handleSubmit = evt => {
   }
 
   console.log(formData);
-  localStorage.clear();
+  localStorage.removeItem(localStorageKey);
   form.reset();
 };
 
